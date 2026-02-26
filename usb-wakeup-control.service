@@ -4,7 +4,7 @@ Before=sleep.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/bin/usb-wakeup-control systemd-run-before-sleep
+ExecStart=/usr//bin/usb-wakeup-control systemd-run-before-sleep
 StandardOutput=journal
 
 [Install]

@@ -10,7 +10,7 @@ function usage {
   echo "Also useful to prevent unintended mouse movements from accidentally waking up your laptop."
   echo
   echo "Usage:"
-  echo "  $0 install                       install this script as /usr/local/bin/usb-wakeup-control and add a systemd service to /etc/systemd/system"
+  echo "  $0 install                       install this script as /usr/bin/usb-wakeup-control and add a systemd service to /etc/systemd/system"
   echo "                             NOTE: This is required for the other commands to persist after rebooting or unplugging and replugging."
   echo "  $0 detect                        list all connected USB devices and their current wakeup status"
   echo "  $0 disable vendorId productId    disable wakeup for a specific USB device"
@@ -33,7 +33,7 @@ function usage {
   echo "  $0 enable 0bda 8153"
   echo
   echo "Note: The disable and enable commands require sudo (root privileges) to write to /sys/bus/usb/devices/*/power/wakeup"
-  echo "      The install command also requires root privileges to write to /usr/local/bin and /etc/systemd/system"
+  echo "      The install command also requires root privileges to write to /usr/bin and /etc/systemd/system"
 }
 
 #--------------------------------------------------------------------------------------------------
@@ -115,9 +115,9 @@ function install {
   here=$(dirname "$0")
   cd "$here" || exit
 
-  echo "Installing usb-wakeup-control to /usr/local/bin"
-  cp "$0" /usr/local/bin/usb-wakeup-control
-  chmod +x /usr/local/bin/usb-wakeup-control
+  echo "Installing usb-wakeup-control to /usr/bin"
+  cp "$0" /usr/bin/usb-wakeup-control
+  chmod +x /usr/bin/usb-wakeup-control
 
   service_file="usb-wakeup-control.service"
   target_dir="/etc/systemd/system"
