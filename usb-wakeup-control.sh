@@ -70,12 +70,15 @@ function set_wakeup_state {
   state=$5
 
   wakeup_file=$(find_wakeup_file "$vendor" "$product")
-  bus=${wakeup_file%/power/wakeup}
-
-  old_state=$(cat "$wakeup_file")
-  echo "$state" > "$wakeup_file"
-  new_state=$(cat "$wakeup_file")
-  echo "Bus-port:$bus vendor=$vendor product=$product name=$product_name WakeUp: old=$old_state new=$new_state"
+  if [ -e "$wakeup_file" ];then
+    bus=${wakeup_file%/power/wakeup}
+    old_state=$(cat "$wakeup_file")
+    echo "$state" > "$wakeup_file"
+    new_state=$(cat "$wakeup_file")
+    echo "Bus-port:$bus vendor=$vendor product=$product name=$product_name WakeUp: old=$old_state new=$new_state"
+  else
+    echo "vendor=$vendor product=$product not found - consider removing entry from configuration file"
+  fi
 }
 
 # Check if a USB device is disabled in the config
